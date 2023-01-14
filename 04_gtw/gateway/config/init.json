@@ -1,0 +1,32 @@
+
+{
+    "gateway" : {
+        "log" : 2},    
+
+    "mqtt_broker" : {
+        "address": "mqtt.eclipseprojects.io",
+        "port"   : 1883
+        },
+
+    "mqtt_connection" : {
+        "ID"      : "Cliente1" ,
+        "data"    : "test01" ,
+        "timeout" : 60
+        },
+
+    "mqtt_user" : {
+        "name" : "test03" ,
+        "pwd"  : "test03" 
+        },
+
+    "db" : {
+        "host" : "dbsrv01" ,
+        "port" : 5432,
+        "name" : "test01" 
+        },
+
+    "db_user" : {
+        "name" : "usertest01" ,
+        "pwd"  : "test01" 
+        }
+}

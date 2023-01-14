@@ -1,0 +1,5 @@
+docker run --name pgsqlsrv \
+           --network dck01_local_net \
+           --network-alias pgsqlsrv \
+           -e POSTGRES_PASSWORD=testing \
+           -d postgres

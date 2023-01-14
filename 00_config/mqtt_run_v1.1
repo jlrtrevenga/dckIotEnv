@@ -1,0 +1,7 @@
+docker run -it --name mosquitto -p 1883:1883 \
+       --network dck01_local_net \
+       --network-alias mosquitto \
+       -v /home/fredo69/Proyectos/dck01/01_Mqtt/mosquitto/config:/mosquitto/config \
+       -v dck01.01_mqtt.mosquitto.data:/mosquitto/data \
+       -v dck01.01_mqtt.mosquitto.log:/mosquitto/log \
+       eclipse-mosquitto 

@@ -1,0 +1,4 @@
+docker run -it --rm --name pgsqlcli \
+           --network dck01_local_net \
+           --network-alias pgsqlcli \
+           postgres psql -h pgsqlsrv -U postgres

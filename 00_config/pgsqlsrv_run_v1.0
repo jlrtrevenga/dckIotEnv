@@ -1,0 +1,1 @@
+docker run --name postsql1 -e POSTGRES_PASSWORD=testing -d postgres

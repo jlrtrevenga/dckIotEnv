@@ -1,0 +1,5 @@
+docker run -it --name mosquitto -p 1883:1883 \
+       -v /home/fredo69/Proyectos/dck01/01_Mqtt/mosquitto/config:/mosquitto/config \
+       -v /home/fredo69/Proyectos/dck01/01_Mqtt/mosquitto/data:/mosquitto/data \
+       -v /home/fredo69/Proyectos/dck01/01_Mqtt/mosquitto/log:/mosquitto/log \
+       eclipse-mosquitto 

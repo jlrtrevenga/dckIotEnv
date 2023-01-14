@@ -1,0 +1,24 @@
+#  docker build -t gtw_mqtt .
+
+#FROM python:3.11.0a7-alpine3.15
+FROM python:alpine3.17
+
+WORKDIR /usr/src/app
+
+COPY requirements.txt ./
+COPY gateway_mqtt.py ./
+COPY gtw01.py ./
+
+RUN apk update\
+  && apk add --no-cache --virtual .build-deps\
+  postgresql-dev gcc libpq python3-dev musl-dev linux-headers postgresql-libs\
+  && pip install --no-cache-dir -r requirements.txt\
+  && rm -rf /var/cache/apk/*
+
+#  && apk del .build-deps\
+#  && rm -rf /var/cache/apk/*
+
+#CMD [ "sleep", "1000" ]
+
+CMD [ "python3", "./gtw01.py",  "-f", "/gateway/config/init.json" ]
+# init.json file debe estar en el directorio externo anterior, linkado al contenedor

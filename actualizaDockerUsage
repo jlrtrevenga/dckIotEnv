@@ -1,0 +1,3 @@
+echo >> dockerUsage.txt
+date >> dockerUsage.txt
+docker system df >> dockerUsage.txt
