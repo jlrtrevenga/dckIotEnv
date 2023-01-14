@@ -1,0 +1,56 @@
+
+mar 27 dic 2022 08:14:37 CET
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          11        5         2.592GB   1.387GB (53%)
+Containers      8         4         11.52kB   0B (0%)
+Local Volumes   8         6         146.1MB   3.615kB (0%)
+Build Cache     0         0         0B        0B
+
+mié 28 dic 2022 09:44:18 CET
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          11        5         2.592GB   1.387GB (53%)
+Containers      8         4         11.59kB   0B (0%)
+Local Volumes   8         6         146.1MB   3.615kB (0%)
+Build Cache     0         0         0B        0B
+
+mié 28 dic 2022 14:11:43 CET
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          14        2         3.31GB    2.936GB (88%)
+Containers      4         0         0B        0B
+Local Volumes   8         2         146.1MB   59.3MB (40%)
+Build Cache     0         0         0B        0B
+
+jue 29 dic 2022 11:58:36 CET
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          14        5         3.31GB    2.005GB (60%)
+Containers      8         4         11.16kB   0B (0%)
+Local Volumes   8         6         146.1MB   3.615kB (0%)
+Build Cache     0         0         0B        0B
+
+sáb 31 dic 2022 12:12:42 CET
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          15        5         3.975GB   2.67GB (67%)
+Containers      8         4         12.21kB   0B (0%)
+Local Volumes   8         6         146MB     3.615kB (0%)
+Build Cache     0         0         0B        0B
+
+jue 05 ene 2023 22:22:26 CET
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          14        5         3.31GB    2.005GB (60%)
+Containers      8         4         12.21kB   0B (0%)
+Local Volumes   8         6         146.2MB   3.615kB (0%)
+Build Cache     0         0         0B        0B
+
+dom 08 ene 2023 10:42:19 CET
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          14        5         3.31GB    2.005GB (60%)
+Containers      8         4         12.21kB   0B (0%)
+Local Volumes   8         6         146.2MB   3.615kB (0%)
+Build Cache     0         0         0B        0B
+
+dom 08 ene 2023 20:11:56 CET
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          14        6         3.31GB    1.688GB (50%)
+Containers      9         5         12.21kB   0B (0%)
+Local Volumes   9         7         167.4MB   3.615kB (0%)
+Build Cache     0         0         0B        0B

@@ -1,0 +1,65 @@
+
+ 1108  docker system --help
+ 1109  docker system info
+ 1111  docker system df
+ 1112  docker system df vervose
+ 1113  docker system df --help
+ 1114  docker system df -v
+ 1115  docker system events
+
+ 1839  docker-compose -f dck02.yml status
+ 1841  docker-compose -f dck02.yml up
+ 1842  docker-compose -f dck02.yml down
+ 1476  docker-compose -f dck01.yml up -d
+ 1467  docker-compose -f dck02.yml create
+ 1459  docker-compose -f dck02.yml run
+ 1460  docker-compose -f dck02.yml start
+ 1462  docker-compose -f dck02.yml stop
+ 1461  docker-compose -f dck02.yml restart
+ 1464  docker-compose --help
+ 1465  docker-compose -f dck02.yml pause
+ 1466  docker-compose -f dck02.yml unpause
+ 1469  docker-compose -f dck02.yml top
+ 1471  docker-compose -f dck02.yml ps
+docker-compose -f dck03.yml 
+
+ 1291  docker image ls -a
+ 1292  docker image --help
+ 1294  docker image inspect alpine
+
+ 1552  docker build -t gtw03 . 
+ 1375  docker start gtw03
+ 1376  docker run gtw03
+ 1555  docker image ls -a
+ 1556  docker image remove 9d3aa1d1e608
+ 1497  docker container inspect 9ba598fb76ec
+ 1558  docker container rm 9ba598fb76ec
+
+
+ 1170  docker status
+ 1171  docker --help
+ 1176  docker stats
+
+ 1105  htop
+ 1106  top
+ 1107  clear
+
+
+
+ 1164  wg
+ 1165  wg -help
+ 1166  wg show
+ 1167  wg show --help
+ 1168  wg show all
+
+
+
+ 1379  pip list
+
+
+ 1
+
+
+
+
+

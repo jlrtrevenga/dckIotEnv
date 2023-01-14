@@ -1,0 +1,166 @@
+version: "3.9"
+
+#3.1 - Added Grafana container
+#3.2 - Added Dbeaver container
+
+
+services:
+
+  mosquitto:
+    image: eclipse-mosquitto
+    hostname: mosquitto
+    container_name: dck01.mqtt
+#    expose:
+#      - 1883
+    ports:
+      - 1883:1883
+    networks:
+        front:
+          ipv4_address: 172.20.1.10
+        back:
+    volumes:
+      - type: volume
+        source: dck01.mosquitto.data01
+        target: /mosquitto/data
+        read_only: no
+      - type: volume
+        source: dck01.mosquitto.log01
+        target: /mosquitto/log
+        read_only: no
+      - type: bind
+        source: /home/fredo69/Proyectos/dck01/01_Mqtt/mosquitto/config
+        target: /mosquitto/config
+
+ 
+  dbsrv01:
+    image: postgres
+    hostname: postgres
+    container_name: dck01.dbsrv
+    ports:
+      - 5432:5432
+    networks:
+      front:
+           ipv4_address: 172.20.1.11
+      back:
+    volumes: 
+      - type: volume
+        source: dck01.postgres.data01
+        target: /var/lib/postgresql/data
+        read_only: no
+    environment:
+      POSTGRES_DB: test01
+      POSTGRES_PASSWORD: test01
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    hostname: pgadmin4
+    container_name: dck01.dbadmin
+    ports: 
+      - 80:80
+    networks:
+      front:
+          ipv4_address: 172.20.1.12
+      back:
+    volumes: 
+      - type: volume
+        source: dck01.pgadmin.data01
+        target: /var/lib/pgadmin
+        read_only: no
+    environment:
+       PGADMIN_DEFAULT_EMAIL: pepe@gmail.com
+       PGADMIN_DEFAULT_PASSWORD: test01
+       PGADMIN_LISTEN_PORT: 80
+
+
+  grafana:
+    image: grafana/grafana-oss:9.3.2
+    hostname: grafana
+    container_name: dck01.grafana
+    depends_on:
+        - dbsrv01
+    ports: 
+      - 3000:3000
+    networks:
+      front:
+          ipv4_address: 172.20.1.14
+      back:
+    volumes: 
+      - type: volume
+        source: dck01.grafana.data01
+        target: /var/lib/grafana
+        read_only: no
+    environment:
+       GF_DATABASE_TYPE: postgres
+       GF_DATABASE_HOST: postgres:5432
+       GF_DATABASE_NAME: test01
+       GF_DATABASE_USER: grafana_user01
+       GF_DATABASE_PASSWORD: test01
+       GF_DATABASE_SSL_MODE: disable
+
+
+  gtw_mqtt:
+    image: gateway_mqtt:1.04
+    hostname: gateway_mqtt
+    container_name: dck01.gtw_mqtt
+    depends_on:
+      - dbsrv01
+      - mosquitto
+    networks:
+        front:
+          ipv4_address: 172.20.1.13
+        back:
+    volumes:
+      - type: bind
+        source: /home/fredo69/Proyectos/dck01/04_gtw/gateway/config
+        target: /gateway/config
+   
+
+  dbeaver:
+    image: dbeaver/cloudbeaver:22.3.2
+    hostname: gateway_mqtt
+    container_name: dck01.dbeaver
+    depends_on:
+      - dbsrv01
+    ports: 
+      - 8978:8978
+    networks:
+        front:
+          ipv4_address: 172.20.1.15
+        back:   
+    volumes: 
+      - type: volume
+        source: dck01.dbeaver.data01
+        target: /opt/cloudbeaver/workspace
+        read_only: no
+
+
+
+
+networks:
+  front:
+#    driver: bridge
+    ipam:
+      config: 
+        -  subnet: 172.20.1.0/24
+#          gateway: 172.20.1.1
+  back:
+
+
+volumes:
+  dck01.mosquitto.data01:
+        external: true
+  dck01.mosquitto.log01:
+        external: true
+  dck01.postgres.data01:
+        external: true
+  dck01.pgadmin.data01:
+        external: true
+  dck01.grafana.data01:
+        external: true
+  dck01.dbeaver.data01:
+        external: true
+
+
+
