@@ -1,9 +1,11 @@
 version: "3.9"
 
+#Version not operative, airflow not correctly configured
+
 services:
 
   mosquitto:
-    image: eclipse-mosquitto
+    image: eclipse-mosquitto:2.0.15-openssl
     hostname: mosquitto
     container_name: dck01.mqtt
 #    expose:
@@ -24,12 +26,13 @@ services:
         target: /mosquitto/log
         read_only: no
       - type: bind
-        source: /home/fredo69/Proyectos/dck01/01_Mqtt/mosquitto/config
+        source: ./01_Mqtt/mosquitto/config
         target: /mosquitto/config
 
  
   dbsrv01:
-    image: postgres
+#    image: postgres:15.1-bullseye
+    image: postgres:14.6-bullseye
     hostname: postgres
     container_name: dck01.dbsrv
     ports:
@@ -50,7 +53,7 @@ services:
 
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:6.18
     hostname: pgadmin4
     container_name: dck01.dbadmin
     ports: 
@@ -83,8 +86,89 @@ services:
         back:
     volumes:
       - type: bind
-        source: /home/fredo69/Proyectos/dck01/04_gtw/gateway/config
+        source: ./04_gtw/gateway/config
         target: /gateway/config
+
+
+  grafana:
+    image: grafana/grafana-oss:9.3.2
+    hostname: grafana
+    container_name: dck01.grafana
+    depends_on:
+        - dbsrv01
+    ports: 
+      - 3000:3000
+    networks:
+      front:
+          ipv4_address: 172.20.1.14
+      back:
+    volumes: 
+      - type: volume
+        source: dck01.grafana.data01
+        target: /var/lib/grafana
+        read_only: no
+    environment:
+       GF_DATABASE_TYPE: postgres
+       GF_DATABASE_HOST: postgres:5432
+       GF_DATABASE_NAME: test01
+       GF_DATABASE_USER: grafana_user01
+       GF_DATABASE_PASSWORD: test01
+       GF_DATABASE_SSL_MODE: disable  
+
+  dbeaver:
+    image: dbeaver/cloudbeaver:22.3.2
+    hostname: gateway_mqtt
+    container_name: dck01.dbeaver
+    depends_on:
+      - dbsrv01
+    ports: 
+      - 8978:8978
+    networks:
+        front:
+          ipv4_address: 172.20.1.15
+        back:   
+    volumes: 
+      - type: volume
+        source: dck01.dbeaver.data01
+        target: /opt/cloudbeaver/workspace
+        read_only: no
+
+
+  # scheduler & monitoring service
+  airflow:
+    image: apache/airflow:slim-2.5.0-python3.8  
+    hostname: airflow
+    container_name: dck01.airflow
+    entrypoint: 
+    ports:
+      - '8085:8080'
+    networks:
+        front:
+          ipv4_address: 172.20.1.16
+        back:  
+    volumes:
+      - type: volume
+        source: dck01.airflow.data01
+        target: /usr/local/airflow/data
+        read_only: no
+      - type: volume
+        source: dck01.airflow.logs01
+        target: /usr/local/airflow/logs
+        read_only: no
+      - type: volume
+        source: dck01.airflow.dags01
+        target: /usr/local/airflow/dags
+        read_only: no
+#      - type: bind
+#        source: ./airflow/requirements/requirements.txt
+#        target: requirements.txt
+
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://airflow:8080/admin/"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
 
 
 networks:
@@ -96,7 +180,7 @@ networks:
 #          gateway: 172.20.1.1
   back:
 
-
+# Create all volumes prior to initial start 
 volumes:
   dck01.mosquitto.data01:
         external: true
@@ -105,4 +189,14 @@ volumes:
   dck01.postgres.data01:
         external: true
   dck01.pgadmin.data01:
+        external: true
+  dck01.grafana.data01:
+        external: true
+  dck01.dbeaver.data01:
+        external: true
+  dck01.airflow.data01:
+        external: true
+  dck01.airflow.logs01:
+        external: true
+  dck01.airflow.dags01:
         external: true
