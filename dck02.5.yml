@@ -43,12 +43,13 @@ services:
       back:
     volumes: 
       - type: volume
-        source: dck01.postgres.data01
+        source: dck01.postgres.data03
         target: /var/lib/postgresql/data
         read_only: no
     environment:
-      POSTGRES_DB: test01
-      POSTGRES_PASSWORD: test01
+      POSTGRES_DB: iotdb
+      POSTGRES_USER: admin01
+      POSTGRES_PASSWORD: admin01
       PGDATA: /var/lib/postgresql/data/pgdata
 
 
@@ -74,8 +75,8 @@ services:
 
 
   gtw_mqtt:
-    image: gateway_mqtt:1.04
-    hostname: gateway_mqtt
+    image: gtw_mqtt:1.05
+    hostname: gtw_mqtt
     container_name: dck01.gtw_mqtt
     depends_on:
       - dbsrv01
@@ -110,9 +111,9 @@ services:
     environment:
        GF_DATABASE_TYPE: postgres
        GF_DATABASE_HOST: postgres:5432
-       GF_DATABASE_NAME: test01
-       GF_DATABASE_USER: grafana_user01
-       GF_DATABASE_PASSWORD: test01
+       GF_DATABASE_NAME: iotdb
+       GF_DATABASE_USER: user01
+       GF_DATABASE_PASSWORD: user01
        GF_DATABASE_SSL_MODE: disable  
 
   dbeaver:
@@ -149,7 +150,7 @@ volumes:
         external: true
   dck01.mosquitto.log01:
         external: true
-  dck01.postgres.data01:
+  dck01.postgres.data03:
         external: true
   dck01.pgadmin.data01:
         external: true

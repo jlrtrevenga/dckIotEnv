@@ -186,7 +186,7 @@ class gtw:
 
     def record_measure(self, topic, value):
         dt1 = datetime.datetime.now(tz=None)
-        SQL= "INSERT INTO MEASURES (device, value, timestamp_local) VALUES (%s, %s, %s);"
+        SQL= "INSERT INTO MEASURES (measure, value, timestamp_local) VALUES (%s, %s, %s);"
         data = (topic, value, dt1)
 
         try:

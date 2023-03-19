@@ -1,6 +1,6 @@
 #  docker build -t gtw_mqtt .
 
-FROM python:alpine3.17.0
+FROM python:3.8-alpine3.17
 
 WORKDIR /usr/src/app
 

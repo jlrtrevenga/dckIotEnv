@@ -1,0 +1,44 @@
+
+-----------------------------------------
+-- Tests, dummy users with no safety
+-----------------------------------------
+
+postgresql:
+  - roles:
+      - radmin: all
+      - reng: create/delete tables,
+      - ruser: select, insert on tables
+
+  - users:
+      - admin: admin01/admin01 (asignado al contenedor dbsrv01 para crear la BBDD al instanciarla por primera vez)
+      - eng: eng01/eng01
+      - user: user01/user01
+      - user: user02/user02
+      - user: user03/user03     
+      - readuser: grafana01/grafana01
+
+
+pgadmin:
+ - admin: pepe@gmail.com/test01
+
+
+cloudbeaver:
+  - admin: cbadmin/admin2024
+  - syseng: 
+  - user:
+
+
+grafana:
+  - admin: gradmin/gradmin
+  - syseng:
+  - user:
+
+
+mqtt:
+ - test01/test01
+ - test02/test02
+ - test03/test03
+
+
+
+

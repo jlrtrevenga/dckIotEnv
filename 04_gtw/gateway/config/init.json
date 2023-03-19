@@ -22,11 +22,11 @@
     "db" : {
         "host" : "dbsrv01" ,
         "port" : 5432,
-        "name" : "test01" 
+        "name" : "iotdb" 
         },
 
     "db_user" : {
-        "name" : "usertest01" ,
-        "pwd"  : "test01" 
+        "name" : "user01" ,
+        "pwd"  : "user01" 
         }
 }

@@ -1,0 +1,21 @@
+
+# to be executed from project root directory
+
+#Build mqtt->postgresql gateway
+#cd ./04_gtw/container_creation
+#sudo docker build -t gtw_mqtt:1.04 .
+
+#Create all volumes
+docker volume create dck01.mosquitto.data01
+docker volume create dck01.mosquitto.log01
+docker volume create dck01.postgres.data01
+docker volume create dck01.pgadmin.data01
+docker volume create dck01.grafana.data01
+docker volume create dck01.dbeaver.data01
+docker volume create dck01.pgadmin.data01
+
+#download images, create containers and start stack
+docker compose -f dck02.5.yml up -d
+
+
+
